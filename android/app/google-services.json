@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1022755808850",
+    "project_id": "crud-swiftxflutter",
+    "storage_bucket": "crud-swiftxflutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022755808850:android:1cdf06d80430846a83e18b",
+        "android_client_info": {
+          "package_name": "com.example.auth_cap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1022755808850-dkuhloem7etltqtsvm33ceomvvq3dgkh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAOdR4ddw-pEBfU_58Q7T7NnI7vAdwB3E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1022755808850-dkuhloem7etltqtsvm33ceomvvq3dgkh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1022755808850-km8oeimo030ks1cfnig7tds5bsgibper.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "javierh.Proyecto-Final"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
