@@ -1,9 +1,12 @@
 import 'package:auth_cap/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+  //const RegisterScreen({Key? key}) : super(key: key);
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +46,13 @@ class RegisterScreen extends StatelessWidget {
                 emailController.text,
                 passwordController.text,
               );
+              users
+                  .add({
+                    'email': emailController.text,
+                    'password': passwordController.text
+                  })
+                  .then((value) => print('Usuario añadido'))
+                  .catchError((error) => print('falló añadir usuario'));
               Navigator.pop(context);
             },
             child: Text('Registrarse'),
