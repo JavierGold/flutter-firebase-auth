@@ -6,7 +6,8 @@ import 'package:firebase_core/firebase_core.dart';
 
 class RegisterScreen extends StatelessWidget {
   //const RegisterScreen({Key? key}) : super(key: key);
-  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  final CollectionReference users =
+      FirebaseFirestore.instance.collection('users');
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +43,16 @@ class RegisterScreen extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () async {
-              await authService.createUserWithEmailAndPassword(
+              final authUser = await authService.createUserWithEmailAndPassword(
                 emailController.text,
                 passwordController.text,
               );
               users
                   .add({
                     'email': emailController.text,
-                    'password': passwordController.text
+                    //'password': passwordController.text,
+                    'uid': authUser!.uid,
+                    'tipo': 'user'
                   })
                   .then((value) => print('Usuario añadido'))
                   .catchError((error) => print('falló añadir usuario'));
