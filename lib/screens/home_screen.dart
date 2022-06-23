@@ -19,24 +19,45 @@ class HomeScreen extends StatelessWidget {
     final authService = Provider.of<AuthService>(context);
 
     return Scaffold(
+      backgroundColor: Colors.amber,
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text(
+          'Home',
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text('Estás en Home Screen'),
-          Center(
-            child: ElevatedButton(
-              child: Text('Cerrar Sesión'),
-              onPressed: () async {
-                await authService.signOut();
-              },
-            ),
+          const Icon(
+            Icons.home,
+            size: 70,
           ),
-          Text(
+          const Text(
+            'Estás en Home Screen',
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+          ),
+          SizedBox(
+              child: Column(
+            children: [
+              const SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.black),
+                ),
+                child: const Text('Cerrar Sesión',
+                    style: TextStyle(color: Colors.white, fontSize: 15)),
+                onPressed: () async {
+                  await authService.signOut();
+                },
+              ),
+            ],
+          )),
+          const Text(
             'Leer usuarios de Firestore',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
           ),
           Container(
               height: 200,
@@ -67,15 +88,26 @@ class HomeScreen extends StatelessWidget {
   Widget showButton(
     String actualUserId,
   ) {
-    return ElevatedButton(
-        onPressed: () async {
-          // await authService.delete();
+    return SizedBox(
+      height: 25,
+      width: 50,
+      child: ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+          ),
+          onPressed: () async {
+            // await authService.delete();
 
-          usersCollectionReference.doc(actualUserId).delete().then((_) {
-            print('Se eliminó correctamente');
-          });
-        },
-        child: const Icon(Icons.delete));
+            usersCollectionReference.doc(actualUserId).delete().then((_) {
+              print('Se eliminó correctamente');
+            });
+          },
+          child: const Icon(
+            Icons.delete,
+            size: 18,
+            color: Colors.white,
+          )),
+    );
   }
 
   Widget showList(AuthService authService, QuerySnapshot<Object?> data,
@@ -90,12 +122,22 @@ class HomeScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 // print(data.docs[index].id);
                 final currentUser = authService.getCurrentUser();
-                return Row(
-                  children: [
-                    Text('Correo: ${data.docs[index]['email']}'),
-                    showButton(data.docs[index].id)
-                  ],
-                );
+                return Column(children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        'Correo:   ${data.docs[index]['email']}',
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w600),
+                      ),
+                      showButton(data.docs[index].id)
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  )
+                ]);
               },
             );
           }
